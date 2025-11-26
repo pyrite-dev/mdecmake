@@ -2,7 +2,7 @@ include_guard(DIRECTORY)
 include(MDEPkgConfig)
 
 macro(opengl_add name)
-	if(CMAE_SYSTEM_NAME STREQUAL "Windows")
+	if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		target_link_libraries(
 			${name}
 			PRIVATE
@@ -14,7 +14,7 @@ macro(opengl_add name)
 endmacro()
 
 macro(glu_add name)
-	if(CMAE_SYSTEM_NAME STREQUAL "Windows")
+	if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		target_link_libraries(
 			${name}
 			PRIVATE
