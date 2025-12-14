@@ -49,7 +49,7 @@ endmacro()
 
 macro(setup_library name)
 	if(ARGV2)
-		setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR}/ARGV2)
+		setup_base(library ${name} ARGV2)
 	else()
 		setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
 	endif()
