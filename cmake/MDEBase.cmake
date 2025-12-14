@@ -48,9 +48,11 @@ macro(setup_project name dir)
 endmacro()
 
 macro(setup_library name)
-	include(GNUInstallDirs)
-
-	setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR}/${dir})
+	if(ARGV2)
+		setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR}/ARGV2)
+	else()
+		setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
+	endif()
 
 	if(EXISTS "../include")
 		target_include_directories(
