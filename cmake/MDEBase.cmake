@@ -1,7 +1,7 @@
 include_guard(DIRECTORY)
 include(GNUInstallDirs)
 
-macro(setup_project name dir)
+macro(setup_base type name dir)
 	project(
 		${name}
 	)
@@ -12,21 +12,53 @@ macro(setup_project name dir)
 		*.c
 	)
 
-	add_executable(
-		${name}
-		${${name}_SRC}
-	)
+	if(${type} STREQUAL "project")
+		add_executable(
+			${name}
+			${${name}_SRC}
+		)
+	elseif(${type} STREQUAL "library")
+		add_library(
+			${name}
+			${${name}_SRC}
+		)
+	endif()
 
+	if(NOT ${name} STREQUAL "MDECore")
+		target_link_libraries(
+			${name}
+			PRIVATE
+			MDECore
+		)
+	endif()
 	target_link_libraries(
 		${name}
 		PRIVATE
-		MDECore Mw
+		Mw
 	)
 
 	install(
 		TARGETS ${name}
 		DESTINATION ${dir}
 	)
+endmacro()
+
+macro(setup_project name dir)
+	setup_base(project ${name} ${dir})
+endmacro()
+
+macro(setup_library name)
+	include(GNUInstallDirs)
+
+	setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR}/${dir})
+
+	if(EXISTS "../include")
+		target_include_directories(
+			${name}
+			PUBLIC
+			../include
+		)
+	endif()
 endmacro()
 
 macro(math_add name)
