@@ -20,6 +20,7 @@ macro(mde_setup_base type name dir)
 	elseif(${type} STREQUAL "library")
 		add_library(
 			${name}
+			SHARED
 			${${name}_SRC}
 		)
 	endif()
@@ -48,8 +49,8 @@ macro(mde_setup_project name dir)
 endmacro()
 
 macro(mde_setup_library name)
-	if(ARGV2)
-		mde_setup_base(library ${name} ARGV2)
+	if(NOT ${ARGV1} STREQUAL "")
+		mde_setup_base(library ${name} ${ARGV1})
 	else()
 		mde_setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
 	endif()
