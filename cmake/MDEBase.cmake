@@ -1,7 +1,7 @@
 include_guard(DIRECTORY)
 include(GNUInstallDirs)
 
-macro(setup_base type name dir)
+macro(mde_setup_base type name dir)
 	project(
 		${name}
 	)
@@ -43,15 +43,15 @@ macro(setup_base type name dir)
 	)
 endmacro()
 
-macro(setup_project name dir)
-	setup_base(project ${name} ${dir})
+macro(mde_setup_project name dir)
+	mde_setup_base(project ${name} ${dir})
 endmacro()
 
-macro(setup_library name)
+macro(mde_setup_library name)
 	if(ARGV2)
-		setup_base(library ${name} ARGV2)
+		mde_setup_base(library ${name} ARGV2)
 	else()
-		setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
+		mde_setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
 	endif()
 
 	if(EXISTS "../include")
@@ -63,7 +63,7 @@ macro(setup_library name)
 	endif()
 endmacro()
 
-macro(math_add name)
+macro(mde_math_add name)
 	if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		target_link_libraries(
 			${name}

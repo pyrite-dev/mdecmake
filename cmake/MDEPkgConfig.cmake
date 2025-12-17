@@ -1,7 +1,7 @@
 include_guard(DIRECTORY)
 find_package(PkgConfig)
 
-macro(pkg_config_add dest name)
+macro(mde_pkg_config_add dest name)
 	pkg_check_modules(${name} REQUIRED ${name})
 	target_include_directories(
 		${dest}

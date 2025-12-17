@@ -1,7 +1,7 @@
 include_guard(DIRECTORY)
 include(MDEPkgConfig)
 
-macro(opengl_add name)
+macro(mde_opengl_add name)
 	if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		target_link_libraries(
 			${name}
@@ -9,11 +9,11 @@ macro(opengl_add name)
 			opengl32
 		)
 	else()
-		pkg_config_add(${name} gl)
+		mde_pkg_config_add(${name} gl)
 	endif()
 endmacro()
 
-macro(glu_add name)
+macro(mde_glu_add name)
 	if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 		target_link_libraries(
 			${name}
@@ -21,6 +21,6 @@ macro(glu_add name)
 			glu32
 		)
 	else()
-		pkg_config_add(${name} glu)
+		mde_pkg_config_add(${name} glu)
 	endif()
 endmacro()
