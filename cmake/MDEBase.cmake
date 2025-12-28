@@ -55,7 +55,7 @@ macro(mde_setup_library name)
 		mde_setup_base(library ${name} ${CMAKE_INSTALL_LIBDIR})
 	endif()
 
-	if(EXISTS "../include")
+	if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../include")
 		target_include_directories(
 			${name}
 			PUBLIC
